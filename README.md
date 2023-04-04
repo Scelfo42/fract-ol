@@ -8,13 +8,13 @@ This Project made me discover 2D programming and the psychedelic (and very compl
 
 ## Installation process
 
-To clone correctly use:
+**To clone correctly use:
 
 ```
 git clone --recurse-submodules https://github.com/Scelfo42/fract-ol.git
 ```
 
-Then make sure that you have all the dependencies needed for minilibx, if you are not sure, check <a target=_blank href="https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation">here</a> on how to install them.
+Then make sure that you have all the dependencies needed for minilibx, if you are not sure, check <a target="_blank" href="https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation">here</a> on how to install them.
 
 If you are wondering what fractals are, well they might look like this:
 

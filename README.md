@@ -2,6 +2,10 @@
 
 This Project made me discover 2D programming and the psychedelic (and very complex) universe of fractals in this project, using minilibX.
 
+## Result
+
+[![cscelfo's 42 fract-ol Score](https://badge42.vercel.app/api/v2/clg22s3a2000608ml2qvs6aly/project/2977398)](https://github.com/JaeSeoKim/badge42)
+
 ## Installation process
 
 To clone correctly use:

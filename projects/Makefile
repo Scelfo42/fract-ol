@@ -24,11 +24,14 @@ RMDIR = rm -rf
 
 HEADER = headers_2
 
-RED		    = \033[1;31m
-GREEN		= \033[1;32m
-YELLOW		= \033[1;33m
-BLUE		= \033[1;34m
-CYAN 		= \033[1;36m
+GREY            = \033[0;30m
+RED             = \033[0;31m
+GREEN           = \033[0;32m
+YELLOW          = \033[0;33m
+BLUE            = \033[0;34m
+FUCHSIA         = \033[0;35m
+CYAN            = \033[0;36m
+NC              = \033[0m
 
 all: $(NAME)
 
@@ -39,17 +42,17 @@ $(NAME): dir check_mandatory
 
 dir:
 	if [ -d "$(DIR)" ]; then \
-		echo "$(GREEN)PERFECT! $(BLUE)$(DIR) $(GREEN)exists!"; \
+		echo "$(GREEN)PERFECT! $(BLUE)$(DIR) $(GREEN)exists!$(NC)"; \
 	else \
-		echo "$(RED)ERROR! $(DIR) doesn't exist"; \
+		echo "$(RED)ERROR! $(DIR) doesn't exist$(NC)"; \
 	fi
 	mkdir -p $(LIB_DIR)
 
 check_mandatory:
 	if [ "$(LIB)" ]; then \
-		echo "$(YELLOW)$(LIB) $(GREEN)was created correctly!"; \
+		echo "$(YELLOW)$(LIB) $(GREEN)was created correctly!$(NC)"; \
 	else \
-		echo "$(RED)Something went wrong in creating $(YELLOW)$(LIB)!"; \
+		echo "$(RED)Something went wrong in creating $(YELLOW)$(LIB)!$(NC)"; \
 	fi 
 
 clean: check_clean wait
@@ -58,9 +61,9 @@ clean: check_clean wait
 
 check_clean:
 	if ls $(DIR)/*.o > /dev/null 2>&1;  then \
-		echo "$(GREEN)Everything was cleaned correctly!"; \
+		echo "$(GREEN)Everything was cleaned correctly!$(NC)"; \
 	else \
-		echo "$(RED)Something went wrong in clean!"; \
+		echo "$(RED)Something went wrong in clean!$(NC)"; \
 	fi 
 
 fclean: check_fclean wait
@@ -70,14 +73,30 @@ fclean: check_fclean wait
 
 check_fclean: 
 	if ls $(LIB_DIR)/$(LIB) > /dev/null 2>&1;  then \
-		echo "$(YELLOW)$(LIB) $(GREEN)and $(BLUE)$(LIB_DIR) $(GREEN)were removed correctly!"; \
+		echo "$(YELLOW)$(LIB) $(GREEN)and $(BLUE)$(LIB_DIR) $(GREEN)were removed correctly!$(NC)"; \
 	else \
-		echo "$(RED)Something went wrong in fclean!"; \
+		echo "$(RED)Something went wrong in fclean!$(NC)"; \
 	fi 
 
 re: fclean all
 	$(MAKE) -C $(DIR) re
 	clear
+
+push:
+	git add .
+	@echo "$(RED)Adding all changes..."
+	sleep 1.5
+	@clear
+	@echo "$(GREEN)All changes added$(NC)"
+	@read -p "Enter a custom commit message (leave blank to use the default message): " message; \
+	if [ -n "$$message" ]; then \
+		git commit -m "$$message"; \
+	else \
+		git commit -m "$(shell date +'%H:%M %d-%h') update"; \
+	fi
+	@echo "$(YELLOW)Committing...and..."
+	git push
+	@echo "$(GREEN)PUSHA KEKKO!$(NC)"
 
 norm:
 	norminette *
@@ -85,5 +104,5 @@ norm:
 wait:
 	sleep 1
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re norm push
 .SILENT:

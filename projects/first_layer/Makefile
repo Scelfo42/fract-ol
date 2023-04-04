@@ -40,5 +40,5 @@ re: fclean all
 norm:
 	norminette *
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re norm
 .SILENT:

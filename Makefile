@@ -34,6 +34,15 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 O_SRCS = $(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.c=.o))
 
+GREY            = \033[0;30m
+RED             = \033[0;31m
+GREEN           = \033[0;32m
+YELLOW          = \033[0;33m
+BLUE            = \033[0;34m
+FUCHSIA         = \033[0;35m
+CYAN            = \033[0;36m
+NC              = \033[0m
+
 $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c $(DEPS)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(HEADER_1) -I $(HEADER_2)
@@ -42,13 +51,13 @@ all: $(NAME)
 
 $(NAME): $(SRCS) $(O_SRCS)
 	$(MAKE) -C projects all 
-	$(MAKE) -C minilibx-linux all
+	$(MAKE) -sC minilibx-linux all
 	$(CC) $(CFLAGS) $(O_SRCS) -o $(NAME) -L minilibx-linux -lmlx -lXext -lX11 -lm $(LIB_DIR)/$(LIB)
 	clear
 
 clean:
 	$(MAKE) -C projects clean
-	$(MAKE) -C minilibx-linux clean
+	$(MAKE) -sC minilibx-linux clean
 	$(RM_DIR) $(OBJ_DIR)/
 	$(RM) $(O_SRCS)
 	clear
@@ -61,11 +70,21 @@ fclean: clean
 re: fclean all
 	clear
 
-push: 
+push:
 	git add .
-	git commit -m "March update"
+	@echo "$(RED)Adding all changes..."
+	sleep 1.5
+	@clear
+	@echo "$(GREEN)All changes added$(NC)"
+	@read -p "Enter a custom commit message (leave blank to use the default message): " message; \
+	if [ -n "$$message" ]; then \
+		git commit -m "$$message"; \
+	else \
+		git commit -m "$(shell date +'%H:%M %d-%h') update"; \
+	fi
+	@echo "$(YELLOW)Committing...and..."
 	git push
-	clear
+	@echo "$(GREEN)PUSHA KEKKO!$(NC)"
 
 norm:
 	norminette $(HEADER_1) $(SRCS_DIR) $(OLD_PROJ)

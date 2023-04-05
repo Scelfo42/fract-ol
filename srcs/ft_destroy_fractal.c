@@ -6,7 +6,7 @@
 /*   By: cscelfo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:49:43 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/03/15 15:49:47 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/04/05 18:36:36 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ int	ft_destroy_fractal(t_data *data)
 	ft_free_fractol(&(data->mlx_ptr));
 	free(data);
 	exit(0);
-	return (0);
 }

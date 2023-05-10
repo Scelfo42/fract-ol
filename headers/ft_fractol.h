@@ -6,7 +6,7 @@
 /*   By: cscelfo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/03/24 16:07:02 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/05/10 10:37:43 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
-# define WIN_WIDTH 600 
+# define WIN_WIDTH 600
 # define WIN_HEIGHT 600
 # define MAX_ITER 100
 # define MLX_ERROR -1

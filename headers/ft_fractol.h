@@ -6,7 +6,7 @@
 /*   By: cscelfo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/05/10 10:37:43 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/05/28 15:56:12 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,17 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <pthread.h>
 
-# define WIN_WIDTH 600
-# define WIN_HEIGHT 600
-# define MAX_ITER 100
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
+# define MAX_ITER 500
 # define MLX_ERROR -1
+# define ZOOM_IN_FACTOR 0.9
+# define ZOOM_OUT_FACTOR 1.1
+# define NUM_THREADS 16
 
 typedef struct s_complex
 {
@@ -59,6 +65,9 @@ typedef struct s_data
 	char		*fractal;
 	int			small_side;
 	int			color;
+	int			color_man;
+	int			color_jul;
+	int			color_burn;
 	int			launch;
 	double		x_min;
 	double		x_max;
@@ -68,14 +77,18 @@ typedef struct s_data
 	double		move_y;
 	long double	mouse_x;
 	long double	mouse_y;
-	long double	zoom;
-	long double	new_zoom;
-	long double	zoom_factor;
-	long double	zoom_incr;
-	long double	zoom_decr;
+	double		fe;
+	double		smoothed_value;
 	t_coords	coord;
 	t_img		img;
 }	t_data;
+
+typedef struct s_thread
+{
+	t_data		ptr_data;
+	int			x_start;
+	int			x_end;
+}	t_thread;
 
 /*args check*/
 int		ft_valid_args(t_data *data, int argc, char **argv);
@@ -102,12 +115,15 @@ void	ft_draw(t_data *data);
 void	ft_window_label(t_data *data);
 /*Mandelbrot functions*/
 void	ft_mandelbrot_init(t_data *data);
-int		ft_mandelbrot(t_data *data);
+void	*ft_mandelbrot(void *thread_data);
+void    ft_mandelbrot_decorator(t_data *data);
 /*Julia functions*/
 void	ft_julia_init(t_data *data);
-int		ft_julia(t_data *data);
+void	*ft_julia(void *thread_data);
+void    ft_julia_decorator(t_data *data);
 /*Burning Ship functions*/
 void	ft_burning_ship_init(t_data *data);
-int		ft_burning_ship(t_data *data);
+void	*ft_burning_ship(void *thread_data);
+void    ft_burningship_decorator(t_data *data);
 
 #endif

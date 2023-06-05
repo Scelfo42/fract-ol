@@ -8,7 +8,9 @@ DEBUG_FLAG = -g
 
 OPT_FLAG = -O3
 
-CFLAGS = -Wall -Wextra -Werror $(DEBUG_FLAG) $(OPT_FLAG)
+THREAD_FLAG = -pthread
+
+CFLAGS = -Wall -Wextra -Werror $(THREAD_FLAG) $(DEBUG_FLAG) $(OPT_FLAG)
 
 OLD_PROJ = projects
 

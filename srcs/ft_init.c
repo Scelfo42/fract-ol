@@ -71,10 +71,9 @@ void	ft_draw_handler(t_data *data)
 	data->mouse_x = 0;
 	data->mouse_y = 0;
 	data->small_side = ft_get_small_side();
-	data->zoom = 1;
-	data->zoom_incr = data->zoom / 10;
-	data->zoom_decr = data->zoom_incr;
 	data->coord.max_iter = MAX_ITER;
-	data->color = 0xffffa0;
+	data->color_man = 0x0002FF;
+	data->color_jul = 0x00FF00;
+	data->color_burn = 0x8B0000;
 	ft_draw(data);
 }

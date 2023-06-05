@@ -20,7 +20,7 @@ void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-void	ft_draw(t_data *data)
+void	ft_check_mouse_coord(t_data *data)
 {
 	if (data->mouse_x > WIN_WIDTH)
 		data->mouse_x = WIN_WIDTH;
@@ -28,15 +28,20 @@ void	ft_draw(t_data *data)
 		data->mouse_y = WIN_HEIGHT;
 	if (data->mouse_y < 0)
 		data->mouse_y = 0;
+}
+
+void	ft_draw(t_data *data)
+{
+	ft_check_mouse_coord(data);
 	if (data->launch != 3)
 	{
 		if (data->launch == 1)
-			ft_mandelbrot(data);
+			ft_mandelbrot_decorator(data);
 		else
-			ft_julia(data);
+			ft_julia_decorator(data);
 	}
 	else
-		ft_burning_ship(data);
+		ft_burningship_decorator(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.mlx_img, 0, 0);
 	ft_window_label(data);
@@ -47,7 +52,7 @@ void	ft_window_label(t_data *data)
 	int	color;
 
 	color = 0xffffff;
-	if (data->color >= color - 0x080808 && data->color <= 0x080808)
+	if (data->color_man >= color - 0x080808 && data->color_man <= 0x080808)
 		color = 0x000000;
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 60,
 		color, "Zoom in and out with mouse wheel");

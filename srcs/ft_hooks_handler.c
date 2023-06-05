@@ -20,9 +20,10 @@ void	ft_reset_fractal(t_data *data)
 	data->y_max = 2.0;
 	data->move_x = 0;
 	data->move_y = 0;
-	data->zoom = 1.0;
 	data->coord.max_iter = MAX_ITER;
-	data->color = 0xffffa0;
+	data->color_man = 0x0003FF;
+	data->color_jul = 0x00FF00;
+	data->color_burn = 0xFF0000;
 }
 
 void	ft_zoom_in(t_data *data, int px, int py)
@@ -31,23 +32,14 @@ void	ft_zoom_in(t_data *data, int px, int py)
 		* (data->x_max - data->x_min) / data->small_side;
 	data->mouse_y = data->y_max - (data->move_y + py)
 		* (data->y_max - data->y_min) / data->small_side;
-	data->zoom_decr = data->zoom / 10;
-	data->new_zoom = fabsl(data->zoom - data->zoom_decr);
-	if (data->new_zoom <= data->zoom_decr)
-	{
-		data->zoom_decr /= 10;
-		data->new_zoom = data->zoom - data->zoom_decr;
-	}
-	data->zoom_factor = data->new_zoom / data->zoom;
 	data->x_min = data->mouse_x
-		- (data->mouse_x - data->x_min) * data->zoom_factor;
+		- (data->mouse_x - data->x_min) * ZOOM_IN_FACTOR;
 	data->y_min = data->mouse_y
-		- (data->mouse_y - data->y_min) * data->zoom_factor;
+		- (data->mouse_y - data->y_min) * ZOOM_IN_FACTOR;
 	data->x_max = data->mouse_x
-		+ (data->x_max - data->mouse_x) * data->zoom_factor;
+		+ (data->x_max - data->mouse_x) * ZOOM_IN_FACTOR;
 	data->y_max = data->mouse_y
-		+ (data->y_max - data->mouse_y) * data->zoom_factor;
-	data->zoom = data->new_zoom;
+		+ (data->y_max - data->mouse_y) * ZOOM_IN_FACTOR;
 	data->coord.max_iter += 10;
 }
 
@@ -57,24 +49,15 @@ void	ft_zoom_out(t_data *data, int px, int py)
 		* (data->x_max - data->x_min) / data->small_side;
 	data->mouse_y = data->y_max - (data->move_y + py)
 		* (data->y_max - data->y_min) / data->small_side;
-	data->zoom_incr = data->zoom / 10;
-	data->new_zoom = fabsl(data->zoom + data->zoom_incr);
-	if (data->new_zoom <= data->zoom_decr)
-	{
-		data->zoom_decr /= 10;
-		data->new_zoom = data->zoom + data->zoom_incr;
-	}
-	data->zoom_factor = data->new_zoom / data->zoom;
 	data->x_min = data->mouse_x
-		- (data->mouse_x - data->x_min) * data->zoom_factor;
+		- (data->mouse_x - data->x_min) * ZOOM_OUT_FACTOR;
 	data->y_min = data->mouse_y
-		- (data->mouse_y - data->y_min) * data->zoom_factor;
+		- (data->mouse_y - data->y_min) * ZOOM_OUT_FACTOR;
 	data->x_max = data->mouse_x
-		+ (data->x_max - data->mouse_x) * data->zoom_factor;
+		+ (data->x_max - data->mouse_x) * ZOOM_OUT_FACTOR;
 	data->y_max = data->mouse_y
-		+ (data->y_max - data->mouse_y) * data->zoom_factor;
-	data->zoom = data->new_zoom;
-	data->coord.max_iter -= 2;
+		+ (data->y_max - data->mouse_y) * ZOOM_OUT_FACTOR;
+	data->coord.max_iter -= 10;
 }
 
 int	ft_mouse_handler(int keycode, int px, int py, t_data *data)
@@ -105,7 +88,23 @@ int	ft_key_handler(int keycode, t_data *data)
 	else if (keycode == XK_Right)
 		data->move_x += (WIN_HEIGHT / 20);
 	else if (keycode == XK_c)
-		data->color *= 5;
+	{
+		if (data->launch == 1)
+			data->color_man *= 2;
+		else if (data->launch == 2)
+			data->color_jul *= 2;
+		else if (data->launch == 3)
+			data->color_burn *= 2;
+	}
+	else if (keycode == XK_b)
+	{
+		if (data->launch == 1)
+			data->color_man /= 2;
+		else if (data->launch == 2)
+			data->color_jul /= 2;
+		else if (data->launch == 3)
+			data->color_burn /= 2;
+	}
 	else if (keycode == XK_r)
 		ft_reset_fractal(data);
 	ft_draw(data);

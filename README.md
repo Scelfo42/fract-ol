@@ -16,8 +16,18 @@ git clone --recurse-submodules https://github.com/Scelfo42/fract-ol.git
 
 Then make sure that you have all the dependencies needed for minilibx, if you are not sure, check <a target="_blank" href="https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation">here</a> on how to install them.
 
-If you are wondering what fractals are, well they might look like this:
+If you are wondering what fractals are, well here there are mines:
 
-![mandelbrot set](https://user-images.githubusercontent.com/115648081/229800171-e4f4596c-6395-4300-afcc-b93fb56e8633.png)
+**MANDELBROT:**
+
+#image
+
+**JULIA:**
+
+#image
+
+**BURNINGSHIP:**
+
+#image
 
 Good luck!😈

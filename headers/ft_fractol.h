@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fractol.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cscelfo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/05/28 15:56:12 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/24 19:09:28 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 # include <stdbool.h>
 # include <pthread.h>
 
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 1000
-# define MAX_ITER 500
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 1080
+# define MAX_ITER 10000
 # define MLX_ERROR -1
 # define ZOOM_IN_FACTOR 0.9
 # define ZOOM_OUT_FACTOR 1.1
-# define NUM_THREADS 16
+# define NUM_THREADS 10000
 
 typedef struct s_complex
 {

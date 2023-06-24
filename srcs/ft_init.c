@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cscelfo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:23:05 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/03/24 15:46:21 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/24 19:11:33 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	ft_draw_handler(t_data *data)
 	data->mouse_y = 0;
 	data->small_side = ft_get_small_side();
 	data->coord.max_iter = MAX_ITER;
-	data->color_man = 0x0002FF;
-	data->color_jul = 0x00FF00;
-	data->color_burn = 0x8B0000;
+	data->color_man = 0xFFFFFF;
+	data->color_jul = 0xBA55D3;
+	data->color_burn = 0xFFFFFF;
 	ft_draw(data);
 }

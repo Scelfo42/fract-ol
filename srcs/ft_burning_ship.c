@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:38:42 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/24 19:08:34 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/26 15:19:38 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	*ft_burning_ship(void *thread_d)
 			}
 			pthread_mutex_lock(&mutex);
 			double zn_abs = sqrt(data->coord.z.re_sq + data->coord.z.im_sq);
-            double nu = log(log(zn_abs) / log(2)) / log(2);
-            double smoothed_iter = data->coord.iter + 1 - nu;
-            data->color = (int)(smoothed_iter * (data->color_jul * 5) / data->coord.max_iter);
+			double nu = log(log(zn_abs) / log(2)) / log(2);
+			double smoothed_iter = data->coord.iter + 1 - nu;
+			data->color = (int)((smoothed_iter * (data->color_burn) / data->coord.max_iter)) * 65536;
 			ft_mlx_pixel_put(data, data->coord.px, data->coord.py, data->color);
 			pthread_mutex_unlock(&mutex);
 			data->coord.py++;

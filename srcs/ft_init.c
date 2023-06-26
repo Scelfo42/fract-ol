@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:23:05 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/24 19:11:33 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/26 16:29:52 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_draw_handler(t_data *data)
 	data->small_side = ft_get_small_side();
 	data->coord.max_iter = MAX_ITER;
 	data->color_man = 0xFFFFFF;
-	data->color_jul = 0xBA55D3;
-	data->color_burn = 0xFFFFFF;
+	data->color_jul = 0x0000FF;
+	data->color_burn = 0x0000FF;
 	ft_draw(data);
 }

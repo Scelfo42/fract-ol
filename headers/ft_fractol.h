@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/26 16:46:21 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/27 10:32:11 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 1080
-# define MAX_ITER 100000
+# define MAX_ITER_MAN 10000000 // 10 million
+# define MAX_ITER_BURN 1000000 // 1 million
+# define MAX_ITER_JUL 100000000000 // a lot
+# define MAX_ITER_GENERAL 1000000
 # define MLX_ERROR -1
 # define ZOOM_IN_FACTOR 0.9
 # define ZOOM_OUT_FACTOR 1.1
-# define NUM_THREADS 10000
+# define NUM_THREADS 25000
 
 typedef struct s_complex
 {

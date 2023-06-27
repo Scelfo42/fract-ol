@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hooks_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cscelfo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:50:01 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/03/24 16:12:15 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/06/27 09:46:44 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_reset_fractal(t_data *data)
 	data->y_max = 2.0;
 	data->move_x = 0;
 	data->move_y = 0;
-	data->coord.max_iter = MAX_ITER;
+	data->coord.max_iter = MAX_ITER_GENERAL;
 	data->color_man = 0x0003FF;
 	data->color_jul = 0x00FF00;
 	data->color_burn = 0xFF0000;

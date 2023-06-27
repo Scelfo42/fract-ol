@@ -1,4 +1,4 @@
 fractol
 obj/
 **/lib/
-**/.o
+**/.o/

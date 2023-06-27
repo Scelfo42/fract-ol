@@ -20,7 +20,7 @@ If you are wondering what fractals are, well here there are mines:
 
 **MANDELBROT:**
 
-#image
+![screenshot](/nfs/homes/cscelfo/Desktop/mandelbrot.png?raw=true)
 
 **JULIA:**
 

@@ -20,7 +20,7 @@ If you are wondering what fractals are, well here there are mines:
 
 **MANDELBROT:**
 
-![Mandelbrot](/images/mandelbrot.png)
+![Mandelbrot](/Pictures/mandelbrot.png)
 
 **JULIA:**
 

@@ -20,14 +20,14 @@ If you are wondering what fractals are, well here there are mines:
 
 **MANDELBROT:**
 
-[!Mandelbrot image]<img src="fractals/mandelbrot.png"></img>
+<img src="fractals/mandelbrot.png" target="_blank">Mandelbrot</img>
 
 **JULIA:**
 
-#image
+<img src="fractals/Julia.png" target="_blank">Julia</img>
 
 **BURNINGSHIP:**
 
-#image
+<img src="fractals/Burningship.png" target="_blank">Burningship</img>
 
 Good luck!😈

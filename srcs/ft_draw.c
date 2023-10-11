@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:38:50 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 12:37:52 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 18:45:47 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,33 @@ static void	ft_check_mouse_coord(t_data *data)
 		data->mouse_x = 0;
 }
 
+static char	*ft_calculate_iterations(t_data *data)
+{
+	char	*str;
+	char	*iterations;
+	char	*result;
+
+	str = "Current iterations are ";
+	iterations = ft_itoa(data->coord.max_iter);
+	result = ft_strjoin(str, iterations);
+	free(iterations);
+	return (result);
+}
+
 static void	ft_window_label(t_data *data)
 {
 	int	color;
 
 	color = 0xffffff;
-	if (data->color_man >= color - 0x080808 && data->color_man <= 0x080808)
-		color = 0x000000;
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 60,
-		color, "Zoom in and out with mouse wheel");
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 40,
-		color, "Press Arrow Keys to move around");
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 80,
-		color, "Press 'C' to change color");
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 100,
-		color, "Press 'R' to reset fractal");
-	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 120,
-		color, "Press 'Esc' to exit");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 60, color, "Zoom in and out with mouse wheel");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 40, color, "Press Arrow Keys to move around");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 80, color, "Press 'C' to change color");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 100, color, "Press 'R' to reset fractal");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 120, color, "Press 'Esc' to exit");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 140, color, "Press '1' for Mandelbrot");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 160, color, "Press '2' for Julia");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 180, color, "Press '3' for Burning Ship");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 35, 200, color, ft_calculate_iterations(data));
 }
 
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)

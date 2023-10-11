@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 12:38:51 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:26:06 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 1080
-# define MAX_ITER_MAN 500
-# define MAX_ITER_BURN 10000
-# define MAX_ITER_JUL 2147483647
+# define MAX_ITER_MAN 50
+# define MAX_ITER_BURN 1000
+# define MAX_ITER_JUL 1000
 # define MLX_ERROR -1
 # define ZOOM_IN_FACTOR 0.9
 # define ZOOM_OUT_FACTOR 1.1
-# define NUM_THREADS 50
+# define NUM_THREADS 5000
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
+# define PLUS 65451
 
 typedef struct s_complex
 {
@@ -103,6 +108,13 @@ void	ft_draw_handler(t_data *data);
 /*destroy function*/
 int		ft_destroy_fractal(t_data *data);
 /*hooks handler functions*/
+bool	ft_isarrow(int keycode);
+bool	ft_iscolor_change(int keycode);
+bool	ft_isfractal_change(int keycode);
+void	ft_change_fractal(int keycode, t_data *data);
+void	ft_change_color(t_data *data);
+void	ft_arrow_handler(int keycode, t_data *data);
+void	ft_adjust_color(t_data *data, int sign, int fractal);
 int		ft_mouse_handler(int keycode, int px, int py, t_data *data);
 int		ft_key_handler(int keycode, t_data *data);
 void	ft_reset_fractal(t_data *data);

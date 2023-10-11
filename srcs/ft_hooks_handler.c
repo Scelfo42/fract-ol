@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:50:01 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 12:46:41 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:18:20 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,22 @@ void	ft_reset_fractal(t_data *data)
 
 void	ft_zoom_in(t_data *data, int px, int py)
 {
-	data->mouse_x = data->x_min + (px + data->move_x)
-		* (data->x_max - data->x_min) / data->small_side;
-	data->mouse_y = data->y_max - (data->move_y + py)
-		* (data->y_max - data->y_min) / data->small_side;
-	data->x_min = data->mouse_x
-		- (data->mouse_x - data->x_min) * ZOOM_IN_FACTOR;
-	data->y_min = data->mouse_y
-		- (data->mouse_y - data->y_min) * ZOOM_IN_FACTOR;
-	data->x_max = data->mouse_x
-		+ (data->x_max - data->mouse_x) * ZOOM_IN_FACTOR;
-	data->y_max = data->mouse_y
-		+ (data->y_max - data->mouse_y) * ZOOM_IN_FACTOR;
-	data->coord.max_iter += 10;
+	data->mouse_x = data->x_min + (px + data->move_x) * (data->x_max - data->x_min) / data->small_side;
+	data->mouse_y = data->y_max - (data->move_y + py) * (data->y_max - data->y_min) / data->small_side;
+	data->x_min = data->mouse_x - (data->mouse_x - data->x_min) * ZOOM_IN_FACTOR;
+	data->y_min = data->mouse_y - (data->mouse_y - data->y_min) * ZOOM_IN_FACTOR;
+	data->x_max = data->mouse_x + (data->x_max - data->mouse_x) * ZOOM_IN_FACTOR;
+	data->y_max = data->mouse_y + (data->y_max - data->mouse_y) * ZOOM_IN_FACTOR;
 }
 
 void	ft_zoom_out(t_data *data, int px, int py)
 {
-	data->mouse_x = data->x_min + (px + data->move_x)
-		* (data->x_max - data->x_min) / data->small_side;
-	data->mouse_y = data->y_max - (data->move_y + py)
-		* (data->y_max - data->y_min) / data->small_side;
-	data->x_min = data->mouse_x
-		- (data->mouse_x - data->x_min) * ZOOM_OUT_FACTOR;
-	data->y_min = data->mouse_y
-		- (data->mouse_y - data->y_min) * ZOOM_OUT_FACTOR;
-	data->x_max = data->mouse_x
-		+ (data->x_max - data->mouse_x) * ZOOM_OUT_FACTOR;
-	data->y_max = data->mouse_y
-		+ (data->y_max - data->mouse_y) * ZOOM_OUT_FACTOR;
-	data->coord.max_iter -= 10;
+	data->mouse_x = data->x_min + (px + data->move_x) * (data->x_max - data->x_min) / data->small_side;
+	data->mouse_y = data->y_max - (data->move_y + py) * (data->y_max - data->y_min) / data->small_side;
+	data->x_min = data->mouse_x - (data->mouse_x - data->x_min) * ZOOM_OUT_FACTOR;
+	data->y_min = data->mouse_y - (data->mouse_y - data->y_min) * ZOOM_OUT_FACTOR;
+	data->x_max = data->mouse_x + (data->x_max - data->mouse_x) * ZOOM_OUT_FACTOR;
+	data->y_max = data->mouse_y + (data->y_max - data->mouse_y) * ZOOM_OUT_FACTOR;
 }
 
 int	ft_mouse_handler(int keycode, int px, int py, t_data *data)
@@ -76,53 +62,16 @@ int	ft_key_handler(int keycode, t_data *data)
 		ft_destroy_fractal(data);
 		return (0);
 	}
-	else if (keycode == XK_Up)
-		data->move_y -= (WIN_HEIGHT / 20);
-	else if (keycode == XK_Left)
-		data->move_x -= (WIN_HEIGHT / 20);
-	else if (keycode == XK_Down)
-		data->move_y += (WIN_HEIGHT / 20);
-	else if (keycode == XK_Right)
-		data->move_x += (WIN_HEIGHT / 20);
+	else if (ft_isarrow(keycode))
+		ft_arrow_handler(keycode, data);
 	else if (keycode == XK_c)
-	{
-		if (data->launch == 1)
-			data->color_man *= 2;
-		else if (data->launch == 2)
-			data->color_jul *= 2;
-		else if (data->launch == 3)
-			data->color_burn *= 2;
-	}
-	else if (keycode == XK_b)
-	{
-		if (data->launch == 1)
-			data->color_man /= 2;
-		else if (data->launch == 2)
-			data->color_jul /= 2;
-		else if (data->launch == 3)
-			data->color_burn /= 2;
-	}
+		ft_change_color(data);
+	else if (ft_isfractal_change(keycode))
+		ft_change_fractal(keycode, data);
 	else if (keycode == XK_r)
 		ft_reset_fractal(data);
-	else if (keycode == XK_1)
-	{
-		data->launch = 1;
-		ft_reset_fractal(data);
-	}
-	else if (keycode == XK_2)
-	{
-		data->launch = 2;
-		ft_reset_fractal(data);
-	}
-	else if (keycode == XK_3)
-	{
-		data->launch = 3;
-		ft_reset_fractal(data);
-	}
-	else if (keycode == 65451) // +
-		data->coord.max_iter += 1000;
-	else if (keycode == XK_minus)
-		data->coord.max_iter -= 1000;
+	else if (keycode == PLUS || keycode == XK_minus)
+		ft_adjust_color(data, keycode, data->launch);
 	else
 		return (0);
 	ft_draw(data);

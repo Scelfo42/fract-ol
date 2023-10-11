@@ -30,7 +30,10 @@ LIB_DIR = $(OLD_PROJ)/lib
 
 LIB = $(OLD_PROJ_DIR).a
 
-SRCS_FILES = ft_main.c ft_valid_args.c ft_error_msg.c ft_init.c ft_hooks_handler.c ft_draw.c ft_mandelbrot.c ft_destroy_fractal.c ft_julia.c ft_burning_ship.c \
+SRCS_FILES =	ft_main.c ft_valid_args.c ft_error_msg.c ft_init.c \
+				ft_hooks_handler.c ft_draw.c ft_mandelbrot.c \
+				ft_destroy_fractal.c ft_julia.c ft_burning_ship.c \
+				ft_key_hooks.c \
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 

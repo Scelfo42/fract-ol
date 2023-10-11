@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:23:05 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 12:38:33 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:24:07 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ void	ft_set_fractal_data(t_data *data)
 	{
 		if (data->launch == 1)
 		{
-			data->color_man = 0x000FFF;
+			data->color_man = 0x0000FF;
 			data->coord.max_iter = MAX_ITER_MAN;
 		}
 		else
 		{
-			data->color_jul = 0xFFFFFF;
+			data->color_jul = 0x0000FF;
 			data->coord.max_iter = MAX_ITER_JUL;
 		}
 	}
 	else
 	{
-		data->color_burn = 0x00FFFF;
+		data->color_burn = 0x00000F;
 		data->coord.max_iter = MAX_ITER_BURN;
 	}
 }

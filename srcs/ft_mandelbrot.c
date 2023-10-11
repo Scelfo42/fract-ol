@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:38:32 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 12:30:03 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:11:36 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    *ft_mandelbrot(void *thread_d)
             double zn_abs = sqrt(data->coord.z.re_sq + data->coord.z.im_sq);
             double nu = log(log(zn_abs) / log(2)) / log(2);
             double smoothed_iter = data->coord.iter + 1 - nu;
-            data->color = (int)((smoothed_iter * (data->color_man) / MAX_ITER_MAN)) % 256;
+            data->color = (int)((smoothed_iter * (data->color_man) / data->coord.max_iter)) % 256;
             ft_mlx_pixel_put(data, data->coord.px, data->coord.py, data->color);
             pthread_mutex_unlock(&mutex);
             data->coord.py++;

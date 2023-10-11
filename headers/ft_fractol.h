@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/07/12 14:47:53 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 12:38:51 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 1080
-# define MAX_ITER_MAN 1000000 // 10 million
-# define MAX_ITER_BURN 1000000 // 1 million
-# define MAX_ITER_JUL 100000000000 // a lot
-# define MAX_ITER_GENERAL 1000000
+# define MAX_ITER_MAN 500
+# define MAX_ITER_BURN 10000
+# define MAX_ITER_JUL 2147483647
 # define MLX_ERROR -1
 # define ZOOM_IN_FACTOR 0.9
 # define ZOOM_OUT_FACTOR 1.1
-# define NUM_THREADS 2500
+# define NUM_THREADS 50
 
 typedef struct s_complex
 {
@@ -100,10 +99,8 @@ void	ft_error_msg(void);
 /*init functions*/
 int		ft_init(t_data *data);
 int		ft_hooks_init(t_data *data);
-int		ft_get_small_side(void);
 void	ft_draw_handler(t_data *data);
 /*destroy function*/
-void	*ft_free_fractol(void **ptr);
 int		ft_destroy_fractal(t_data *data);
 /*hooks handler functions*/
 int		ft_mouse_handler(int keycode, int px, int py, t_data *data);
@@ -113,9 +110,9 @@ void	ft_reset_fractal(t_data *data);
 void	ft_zoom_in(t_data *data, int px, int py);	
 void	ft_zoom_out(t_data *data, int px, int py);
 /*draw functions*/
+void	ft_set_fractal_data(t_data *data);
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_draw(t_data *data);
-void	ft_window_label(t_data *data);
 /*Mandelbrot functions*/
 void	ft_mandelbrot_init(t_data *data);
 void	*ft_mandelbrot(void *thread_data);

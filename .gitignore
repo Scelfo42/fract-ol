@@ -1,4 +1,5 @@
 fractol
 obj/
-**/lib/
-**/.o/
+**/lib
+**/.o
+**/.vscode/

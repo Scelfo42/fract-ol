@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:50:01 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/27 09:46:44 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 12:46:41 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void	ft_reset_fractal(t_data *data)
 	data->y_max = 2.0;
 	data->move_x = 0;
 	data->move_y = 0;
-	data->coord.max_iter = MAX_ITER_GENERAL;
-	data->color_man = 0x0003FF;
-	data->color_jul = 0x00FF00;
-	data->color_burn = 0xFF0000;
+	ft_set_fractal_data(data);
 }
 
 void	ft_zoom_in(t_data *data, int px, int py)
@@ -107,6 +104,27 @@ int	ft_key_handler(int keycode, t_data *data)
 	}
 	else if (keycode == XK_r)
 		ft_reset_fractal(data);
+	else if (keycode == XK_1)
+	{
+		data->launch = 1;
+		ft_reset_fractal(data);
+	}
+	else if (keycode == XK_2)
+	{
+		data->launch = 2;
+		ft_reset_fractal(data);
+	}
+	else if (keycode == XK_3)
+	{
+		data->launch = 3;
+		ft_reset_fractal(data);
+	}
+	else if (keycode == 65451) // +
+		data->coord.max_iter += 1000;
+	else if (keycode == XK_minus)
+		data->coord.max_iter -= 1000;
+	else
+		return (0);
 	ft_draw(data);
 	return (0);
 }

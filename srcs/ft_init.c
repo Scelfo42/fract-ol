@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:23:05 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/27 10:30:37 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 12:38:33 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,27 @@ int	ft_init(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 	{
-		ft_printf("An error has occured! Please fix your code ");
-		ft_printf("and then try again!\n");
+		ft_printf("An error has occured creating mlx_ptr!\n");
 		return (MLX_ERROR);
 	}
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH,
-			WIN_HEIGHT, "fract-ol");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cscelfo - fract-ol");
 	if (!data->win_ptr)
 	{
-		ft_printf("An error has occured! Please fix your code ");
-		ft_printf("and then try again!\n");
+		ft_printf("An error has occured creating win_ptr!\n");
 		return (MLX_ERROR);
 	}
 	data->img.mlx_img = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img.mlx_img)
 	{
-		ft_printf("An error has occured! Please fix your code ");
-		ft_printf("and then try again!\n");
+		ft_printf("An error has occured creating mlx_img!\n");
 		return (MLX_ERROR);
 	}
-	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp,
-			&data->img.line_len, &data->img.endian);
+	data->img.addr = mlx_get_data_addr(data->img.mlx_img, &data->img.bpp, &data->img.line_len, &data->img.endian);
+	if (!data->img.addr)
+	{
+		ft_printf("An error has occured getting data address from the img!\n");
+		return (MLX_ERROR);
+	}
 	return (0);
 }
 
@@ -51,13 +51,35 @@ int	ft_hooks_init(t_data *data)
 	return (0);
 }
 
-int	ft_get_small_side(void)
+static int	ft_get_small_side(void)
 {
 	if (WIN_WIDTH < WIN_HEIGHT)
 		return (WIN_WIDTH);
 	else
 		return (WIN_HEIGHT);
 	return (0);
+}
+
+void	ft_set_fractal_data(t_data *data)
+{
+	if (data->launch != 3)
+	{
+		if (data->launch == 1)
+		{
+			data->color_man = 0x000FFF;
+			data->coord.max_iter = MAX_ITER_MAN;
+		}
+		else
+		{
+			data->color_jul = 0xFFFFFF;
+			data->coord.max_iter = MAX_ITER_JUL;
+		}
+	}
+	else
+	{
+		data->color_burn = 0x00FFFF;
+		data->coord.max_iter = MAX_ITER_BURN;
+	}
 }
 
 void	ft_draw_handler(t_data *data)
@@ -71,9 +93,6 @@ void	ft_draw_handler(t_data *data)
 	data->mouse_x = 0;
 	data->mouse_y = 0;
 	data->small_side = ft_get_small_side();
-	data->coord.max_iter = MAX_ITER_GENERAL;
-	data->color_man = 0xFFFFFF;
-	data->color_jul = 0xFFFFFF;
-	data->color_burn = 0x00FFFF;
+	ft_set_fractal_data(data);
 	ft_draw(data);
 }

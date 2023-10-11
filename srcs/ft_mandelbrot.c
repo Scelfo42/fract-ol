@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:38:32 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/06/27 10:31:55 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/11 12:30:03 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ void	ft_mandelbrot_init(t_data *data)
 	data->coord.z.im = 0;
 	data->coord.z.re_sq = 0;
 	data->coord.z.im_sq = 0;
-	data->coord.c.re = data->x_min + (data->coord.px + data->move_x)
-		* (data->x_max - data->x_min) / data->small_side;
-	data->coord.c.im = data->y_max - (data->coord.py + data->move_y)
-		* (data->y_max - data->y_min) / data->small_side;
+	data->coord.c.re = data->x_min + (data->coord.px + data->move_x) * (data->x_max - data->x_min) / data->small_side;
+	data->coord.c.im = data->y_max - (data->coord.py + data->move_y) * (data->y_max - data->y_min) / data->small_side;
 }
 
 void    *ft_mandelbrot(void *thread_d)
 {
-    t_thread *thread_data = (t_thread *)thread_d;
-    t_data *data = &thread_data->ptr_data;
+    t_thread        *thread_data = (t_thread *)thread_d;
+    t_data          *data = &thread_data->ptr_data;
     pthread_mutex_t mutex;
 
     pthread_mutex_init(&mutex, NULL);
@@ -42,10 +40,8 @@ void    *ft_mandelbrot(void *thread_d)
             while (data->coord.z.re_sq + data->coord.z.im_sq < 4
                    && data->coord.iter < data->coord.max_iter)
             {
-                data->coord.z.im = 2 * data->coord.z.re
-                    * data->coord.z.im + data->coord.c.im;
-                data->coord.z.re = data->coord.z.re_sq
-                    - data->coord.z.im_sq + data->coord.c.re;
+                data->coord.z.im = 2 * data->coord.z.re * data->coord.z.im + data->coord.c.im;
+                data->coord.z.re = data->coord.z.re_sq - data->coord.z.im_sq + data->coord.c.re;
                 data->coord.z.re_sq = data->coord.z.re * data->coord.z.re;
                 data->coord.z.im_sq = data->coord.z.im * data->coord.z.im;
                 data->coord.iter++;

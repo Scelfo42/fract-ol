@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:38:50 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 18:45:47 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/16 12:48:41 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)
 void	ft_draw(t_data *data)
 {
 	ft_check_mouse_coord(data);
-	if (data->launch != 3)
+	if (data->launch < 3)
 	{
 		if (data->launch == 1)
 			ft_mandelbrot_decorator(data);
@@ -72,7 +72,12 @@ void	ft_draw(t_data *data)
 			ft_julia_decorator(data);
 	}
 	else
-		ft_burningship_decorator(data);
+	{
+		if (data->launch == 3)
+			ft_burningship_decorator(data);
+		else
+			ft_newton_decorator(data);
+	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.mlx_img, 0, 0);
 	ft_window_label(data);

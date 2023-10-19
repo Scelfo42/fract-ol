@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:49:57 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 12:11:48 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:13:10 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (ft_valid_args(&data, argc, argv) == 0)
+	if (!ft_valid_args(&data, argc, argv))
 		ft_error_msg();
 	else
 	{

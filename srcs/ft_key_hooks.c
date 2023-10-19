@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:50:13 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 19:25:37 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:32:25 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	ft_adjust_color(t_data *data, int sign, int fractal)
 	}
 	if (fractal == 1)
 		data->color_man = color;
-	if (fractal == 2)
+	else if (fractal == 2)
 		data->color_jul = color;
 	else if (fractal == 3)
 		data->color_burn = color;

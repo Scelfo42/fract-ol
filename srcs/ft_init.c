@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 14:23:05 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 19:24:07 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/19 18:34:27 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	ft_get_small_side(void)
 
 void	ft_set_fractal_data(t_data *data)
 {
-	if (data->launch != 3)
+	if (data->launch < 3)
 	{
 		if (data->launch == 1)
 		{
@@ -77,8 +77,13 @@ void	ft_set_fractal_data(t_data *data)
 	}
 	else
 	{
-		data->color_burn = 0x00000F;
-		data->coord.max_iter = MAX_ITER_BURN;
+		if (data->launch == 3)
+		{
+			data->color_burn = 0x00000F;
+			data->coord.max_iter = MAX_ITER_BURN;
+		}
+		else if (data->launch == 4)
+			data->coord.max_iter = MAX_ITER_NEW;
 	}
 }
 

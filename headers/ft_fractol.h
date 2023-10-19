@@ -6,7 +6,7 @@
 /*   By: cscelfo <cscelfo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 12:41:49 by cscelfo           #+#    #+#             */
-/*   Updated: 2023/10/11 19:26:06 by cscelfo          ###   ########.fr       */
+/*   Updated: 2023/10/19 18:34:35 by cscelfo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,24 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <pthread.h>
+# include <complex.h>
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 1080
-# define MAX_ITER_MAN 50
-# define MAX_ITER_BURN 1000
+# define MAX_ITER_MAN 100
 # define MAX_ITER_JUL 1000
+# define MAX_ITER_BURN 1000
+# define MAX_ITER_NEW 100
 # define MLX_ERROR -1
 # define ZOOM_IN_FACTOR 0.9
 # define ZOOM_OUT_FACTOR 1.1
-# define NUM_THREADS 5000
+# define NUM_THREADS 1080
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
 # define PLUS 65451
+#define M_PI 3.14159265358979323846
 
 typedef struct s_complex
 {
@@ -86,6 +89,7 @@ typedef struct s_data
 	long double	mouse_y;
 	double		fe;
 	double		smoothed_value;
+	complex double	newton;
 	t_coords	coord;
 	t_img		img;
 }	t_data;
@@ -137,5 +141,7 @@ void    ft_julia_decorator(t_data *data);
 void	ft_burning_ship_init(t_data *data);
 void	*ft_burning_ship(void *thread_data);
 void    ft_burningship_decorator(t_data *data);
+/*Newton functions*/
+void	ft_newton_decorator(t_data *data);
 
 #endif
